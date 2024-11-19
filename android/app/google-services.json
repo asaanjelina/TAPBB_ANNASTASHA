@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "685596783446",
+    "project_id": "tugasbesarpbb-5c8d2",
+    "storage_bucket": "tugasbesarpbb-5c8d2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685596783446:android:a15487226a29ff195b5cf7",
+        "android_client_info": {
+          "package_name": "com.example.tapbbasa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9sHfzqg2x1he-GLYJhWJ9quYNpXhpcrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
