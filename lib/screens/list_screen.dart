@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'detail_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'detail_screen.dart';
 
 class ListScreen extends StatefulWidget {
   final double fontSize;
@@ -14,8 +15,8 @@ class ListScreen extends StatefulWidget {
 
 class _ListScreenState extends State<ListScreen> {
   List<dynamic> quotes = [];
-  bool isLoading = true; // Status loading
-  String? errorMessage; // Menyimpan pesan error jika fetch gagal
+  bool isLoading = true;
+  String? errorMessage;
 
   @override
   void initState() {
@@ -32,7 +33,7 @@ class _ListScreenState extends State<ListScreen> {
         final List<dynamic> data = json.decode(response.body);
         setState(() {
           quotes = data;
-          isLoading = false; // Selesai loading
+          isLoading = false;
         });
       } else {
         setState(() {
@@ -43,7 +44,7 @@ class _ListScreenState extends State<ListScreen> {
     } catch (e) {
       setState(() {
         isLoading = false;
-        errorMessage = 'An error occurred while fetching quotes: $e';
+        errorMessage = 'An error occurred: $e';
       });
     }
   }
@@ -78,8 +79,6 @@ class _ListScreenState extends State<ListScreen> {
                   itemCount: quotes.length,
                   itemBuilder: (context, index) {
                     final quote = quotes[index];
-
-                    // Handle jika ada data null
                     final String quoteText = quote['q'] ?? 'No quote available';
                     final String author = quote['a'] ?? 'Unknown';
 

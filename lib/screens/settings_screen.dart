@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   final Function(double) onFontSizeChanged;
   final double currentFontSize;
 
   SettingsScreen(
       {required this.onFontSizeChanged, required this.currentFontSize});
+
+  @override
+  _SettingsScreenState createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  late double _fontSize;
+
+  @override
+  void initState() {
+    super.initState();
+    _fontSize = widget
+        .currentFontSize; // Menginisialisasi font size dengan nilai yang diterima
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +35,20 @@ class SettingsScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             Slider(
-              value: currentFontSize,
+              value: _fontSize,
               min: 10.0,
               max: 30.0,
               onChanged: (value) {
-                onFontSizeChanged(value);
+                setState(() {
+                  _fontSize =
+                      value; // Memperbarui nilai font size saat slider digeser
+                });
+                widget.onFontSizeChanged(
+                    value); // Menyampaikan perubahan font size ke parent
               },
             ),
             Text(
-              'Font Size: ${currentFontSize.toStringAsFixed(1)}',
+              'Font Size: ${_fontSize.toStringAsFixed(1)}',
               style: TextStyle(fontSize: 16.0),
             ),
           ],

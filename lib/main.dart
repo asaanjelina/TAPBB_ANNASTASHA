@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:tapbb_asa/screens/about_screen.dart';
-import 'package:tapbb_asa/screens/home_screen.dart';
 import 'firebase_options.dart';
 import 'screens/login_screen.dart';
+import 'screens/home_screen.dart';
 import 'screens/list_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/settings_screen.dart';
+import 'screens/about_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,18 +48,23 @@ class _MainAppState extends State<MainApp> {
   void initState() {
     super.initState();
     _pages.addAll([
-      ListScreen(fontSize: fontSize),
+      HomeScreen(),
+      ListScreen(
+          fontSize:
+              fontSize), // Menambahkan ListScreen dengan font size default
       ProfileScreen(),
       SettingsScreen(
         onFontSizeChanged: (newFontSize) {
           setState(() {
-            fontSize = newFontSize;
+            fontSize = newFontSize; // Menyimpan font size yang baru
+            _pages[1] = ListScreen(
+                fontSize:
+                    fontSize); // Memperbarui ListScreen dengan font size baru
           });
         },
         currentFontSize: fontSize,
       ),
       AboutScreen(),
-      HomeScreen(),
     ]);
   }
 
@@ -71,9 +76,9 @@ class _MainAppState extends State<MainApp> {
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: const Color.fromARGB(255, 40, 103, 211),
         selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white54,
+        unselectedItemColor: const Color.fromARGB(255, 153, 212, 239),
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -83,21 +88,11 @@ class _MainAppState extends State<MainApp> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.format_quote),
-            label: 'Quotes',
-          ),
+              icon: Icon(Icons.format_quote), label: 'Quotes'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'About',
-          )
+              icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(icon: Icon(Icons.info), label: 'About'),
         ],
       ),
     );
